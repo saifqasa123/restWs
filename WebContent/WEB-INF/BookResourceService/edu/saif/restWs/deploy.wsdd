@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- Use this file to deploy some handlers/chains and services      --><!-- Two ways to do this:                                           --><!--   java org.apache.axis.client.AdminClient deploy.wsdd          --><!--      after the axis server is running                          --><!-- or                                                             --><!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   --><!--      from the same directory that the Axis engine runs         --><deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from BookResourceService WSDL service -->
+
+  <service name="BookResource" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://restWs.saif.edu"/>
+      <parameter name="wsdlServiceElement" value="BookResourceService"/>
+      <parameter name="schemaQualified" value="http://restWs.saif.edu"/>
+      <parameter name="wsdlServicePort" value="BookResource"/>
+      <parameter name="className" value="edu.saif.restWs.BookResource"/>
+      <parameter name="wsdlPortType" value="BookResource"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation xmlns:operNS="http://restWs.saif.edu" xmlns:retNS="http://restWs.saif.edu" xmlns:rtns="http://restWs.saif.edu" xmlns:tns="http://restWs.saif.edu" name="getBooks" qname="operNS:getBooks" returnQName="retNS:getBooksReturn" returnType="rtns:ArrayOf_xsd_anyType" returnItemQName="tns:item" soapAction="">
+      </operation>
+      <operation xmlns:operNS="http://restWs.saif.edu" xmlns:retNS="http://restWs.saif.edu" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="addBook" qname="operNS:addBook" returnQName="retNS:addBookReturn" returnType="rtns:string" soapAction="">
+        <parameter xmlns:pns="http://restWs.saif.edu" xmlns:tns="http://restWs.saif.edu" qname="pns:book" type="tns:Book"/>
+      </operation>
+      <operation xmlns:operNS="http://restWs.saif.edu" xmlns:retNS="http://restWs.saif.edu" xmlns:rtns="http://restWs.saif.edu" name="getBook" qname="operNS:getBook" returnQName="retNS:getBookReturn" returnType="rtns:Book" soapAction="">
+        <parameter xmlns:pns="http://restWs.saif.edu" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:bookId" type="tns:int"/>
+      </operation>
+      <parameter name="allowedMethods" value="getBook addBook getBooks"/>
+
+      <typeMapping xmlns:ns="http://restWs.saif.edu" qname="ns:&gt;getBook" type="java:edu.saif.restWs.GetBook" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://restWs.saif.edu" qname="ns:&gt;addBook" type="java:edu.saif.restWs.AddBook" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <arrayMapping xmlns:ns="http://restWs.saif.edu" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema" qname="ns:ArrayOf_xsd_anyType" type="java:java.lang.Object[]" innerType="cmp-ns:anyType" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://restWs.saif.edu" qname="ns:&gt;getBookResponse" type="java:edu.saif.restWs.GetBookResponse" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://restWs.saif.edu" qname="ns:&gt;getBooksResponse" type="java:edu.saif.restWs.GetBooksResponse" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://restWs.saif.edu" qname="ns:Book" type="java:edu.saif.restWs.Book" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://restWs.saif.edu" qname="ns:&gt;addBookResponse" type="java:edu.saif.restWs.AddBookResponse" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://restWs.saif.edu" qname="ns:&gt;getBooks" type="java:edu.saif.restWs.GetBooks" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+  </service>
+</deployment>
