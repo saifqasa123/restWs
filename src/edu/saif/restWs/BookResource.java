@@ -18,7 +18,7 @@ import javax.ws.rs.Produces;
 
 
 /**
- * @author saifddd
+ * @author saif
  *
  */
 @Path("bookresource")
